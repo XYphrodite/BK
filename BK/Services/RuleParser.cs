@@ -10,7 +10,7 @@ public class RuleParser
 
         var words = rule.Split(' ');
         string lastWord = words[words.Count() - 1];
-        model.Diagnisis = lastWord.Trim();
+        model.Diagnisis = lastWord.Trim().Replace('_', ' ');
         for (int i = 1;i<words.Count() - 1; i++)
         {
             if (words[i] == "да" || words[i] == "=") continue;

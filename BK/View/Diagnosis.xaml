@@ -5,28 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BK.View"
         mc:Ignorable="d"
-        Title="Diagnosis" Height="450" Width="600">
+        Title="Diagnosis" Height="450" Width="650">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="450"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <ScrollViewer >
-                <StackPanel x:Name="stackPanel"  Margin="10">
-                    <ListBox ItemsSource="{Binding Symptoms}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <!--COLUMN 1-->
+        <Label Content="{Binding LevelLabel}" FontSize="20" Grid.Column="0" Margin="20 0" Grid.Row="0"/>
+        <ScrollViewer Grid.Column="0" Margin="10" Grid.Row="1">
+                <StackPanel>
+
+                <ListBox ItemsSource="{Binding CurrentSymtoms}" x:Name="SList">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <CheckBox IsThreeState="True" IsChecked="False" Height="20" Content="{Binding Name}" />
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding IsChecked}" Height="20" Content="{Binding Name}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-
                     </ListBox>
+
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
-
+        <Button Content="Далее" Grid.Column="0" Grid.Row="2" Margin="10" Command="{Binding Next}"/>
+        <!--COLUMN 2-->
+        <TextBlock Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="10" 
+                     Text="{Binding Output}"/>
     </Grid>
 </Window>
