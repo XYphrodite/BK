@@ -12,9 +12,9 @@ public class DiagnosisVM : ViewModelBase
     private int LevelNum = 1;
     private Dictionary<int, string> levelLabels = new Dictionary<int, string>
     {
-        {1,"первого" },
-        {2,"второго" },
-        {3,"третьего" }
+        {1,"Симптомы высокой тяжести" },
+        {2,"Симптомы средней тяжести" },
+        {3,"Побочные симптомы" }
     };
     private string _levelLabel;
     public string LevelLabel
@@ -66,7 +66,7 @@ public class DiagnosisVM : ViewModelBase
         //s.ForEach(o => Symptoms1.Add(new SymptomModel { Name = o }));
         Next = new RelayCommand(execute => next());
 
-        LevelLabel = $"Симптомы {levelLabels[LevelNum]} уровня";
+        LevelLabel = $"{levelLabels[LevelNum]}";
     }
 
 
@@ -105,7 +105,7 @@ public class DiagnosisVM : ViewModelBase
             var symptoms = rule.Symptoms.Where(mySymptoms.Contains).ToList();
             double percent = (double)symptoms.Count / (double)rule.Symptoms.Count;
             if (percent != 0)
-                Output += $"Вероятность {rule.Diagnisis} = {Math.Round(percent,2)*100}%" + Environment.NewLine;
+                Output += $"Вероятность = {Math.Round(percent, 2) * 100}%" + Environment.NewLine + $"{rule.Diagnisis} = " + Environment.NewLine+ Environment.NewLine;
         }
 
         
@@ -117,7 +117,7 @@ public class DiagnosisVM : ViewModelBase
         else
         {
             LevelNum++;
-            LevelLabel = $"Симптомы {levelLabels[LevelNum]} уровня";
+            LevelLabel = levelLabels[LevelNum];
             CurrentSymtoms = Loader.LoadSymptoms(LevelNum);
         }
     }
