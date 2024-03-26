@@ -9,13 +9,6 @@ namespace BK.ViewModel;
 
 public class DiagnosisVM : ViewModelBase
 {
-    private int LevelNum = 1;
-    private Dictionary<int, string> levelLabels = new Dictionary<int, string>
-    {
-        {1,"Симптомы высокой тяжести" },
-        {2,"Симптомы средней тяжести" },
-        {3,"Побочные симптомы" }
-    };
     private string _levelLabel;
     public string LevelLabel
     {
@@ -29,6 +22,7 @@ public class DiagnosisVM : ViewModelBase
     public ICollection<SymptomModel> Symptoms1 { get; set; } = new List<SymptomModel>();
     public ICollection<SymptomModel> Symptoms2 { get; set; } = new List<SymptomModel>();
     public ICollection<SymptomModel> Symptoms3 { get; set; } = new List<SymptomModel>();
+
     private ICollection<SymptomModel> _currentSymtoms = new List<SymptomModel>();
     public ICollection<SymptomModel> CurrentSymtoms
     {
@@ -57,16 +51,10 @@ public class DiagnosisVM : ViewModelBase
     public DiagnosisVM()
     {
         Rules = Loader.LoadRules();
-        //Symptoms1 = Loader.LoadSymptoms(1);
-        //Symptoms2 = Loader.LoadSymptoms(2);
-        //Symptoms3 = Loader.LoadSymptoms(3);
-        CurrentSymtoms = Loader.LoadSymptoms(LevelNum);
-        //var s = Rules.SelectMany(r => r.Symptoms).Distinct().ToList();
-
-        //s.ForEach(o => Symptoms1.Add(new SymptomModel { Name = o }));
+        CurrentSymtoms = Loader.LoadSymptoms();
         Next = new RelayCommand(execute => next());
 
-        LevelLabel = $"{levelLabels[LevelNum]}";
+        LevelLabel = $"Симптомы";
     }
 
 
