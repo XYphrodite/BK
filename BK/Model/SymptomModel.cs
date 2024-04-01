@@ -11,10 +11,14 @@ public class SymptomModel
     {
         Name = name;
     }
-    public SymptomModel(string name, IEnumerable<SymptomModel> s)
+    public SymptomModel(string name, params string[] args)
     {
         Name = name;
-        Symptoms = s.ToList();
+        Symptoms = new List<SymptomModel>();
+        foreach (var item in args)
+        {
+            Symptoms.Add(new SymptomModel(item));
+        }
     }
     public SymptomModel()
     {

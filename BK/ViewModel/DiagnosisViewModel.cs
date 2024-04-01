@@ -2,6 +2,7 @@
 using BK.Model;
 using BK.Services;
 using BK.ViewModels;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,9 +20,6 @@ public class DiagnosisVM : ViewModelBase
             OnPropertyChanged(nameof(LevelLabel));
         }
     }
-    public ICollection<SymptomModel> Symptoms1 { get; set; } = new List<SymptomModel>();
-    public ICollection<SymptomModel> Symptoms2 { get; set; } = new List<SymptomModel>();
-    public ICollection<SymptomModel> Symptoms3 { get; set; } = new List<SymptomModel>();
 
     private ICollection<SymptomModel> _currentSymtoms = new List<SymptomModel>();
     public ICollection<SymptomModel> CurrentSymtoms
@@ -39,7 +37,8 @@ public class DiagnosisVM : ViewModelBase
     public string Output
     {
         get => _output;
-        set { 
+        set
+        {
             _output = value;
             OnPropertyChanged(nameof(Output));
         }
@@ -51,7 +50,7 @@ public class DiagnosisVM : ViewModelBase
     public DiagnosisVM()
     {
         Rules = Loader.LoadRules();
-        CurrentSymtoms = Loader.LoadSymptoms(3);
+        CurrentSymtoms = Loader.LoadSymptoms(1);
         Next = new RelayCommand(execute => next());
 
         LevelLabel = $"Симптомы";
@@ -62,7 +61,50 @@ public class DiagnosisVM : ViewModelBase
 
     public void next()
     {
+        Output = string.Empty;
+        //set diagnisis
+        List<SymptomModel> mySymptoms =
+        [
+            //1
+            .. CurrentSymtoms.Where(s => s.IsChecked),
+        ];
+        //2
+        foreach (var item in Loader.LoadSymptoms(2))
+        {
+            bool h = true;
+            foreach (var s in item.Symptoms)
+            {
+                if (!mySymptoms.Contains(s))
+                    h = false;
+            }
+            if (h) { mySymptoms.Add(item); }
+        }
+        //3
+        foreach (var item in Loader.LoadSymptoms(3))
+        {
+            bool h = true;
+            foreach (var s in item.Symptoms)
+            {
+                if (!mySymptoms.Contains(s))
+                    h = false;
+            }
+            if (h) { mySymptoms.Add(item); }
+        }
 
+
+        foreach (var rule in Rules)
+        {
+            int a = 0;
+            foreach(var symptom in rule.Symptoms)
+            {
+                if (mySymptoms.Any(s => s.Name == symptom))
+                    a++;
+            }
+
+            double percent = a / (double)rule.Symptoms.Count;
+            if (percent != 0)
+                Output += $"Вероятность = {Math.Round(percent, 2) * 100}%" + Environment.NewLine + $"{rule.Diagnisis} = " + Environment.NewLine + Environment.NewLine;
+        }
     }
 
     //private void next()
@@ -102,7 +144,7 @@ public class DiagnosisVM : ViewModelBase
     //            Output += $"Вероятность = {Math.Round(percent, 2) * 100}%" + Environment.NewLine + $"{rule.Diagnisis} = " + Environment.NewLine+ Environment.NewLine;
     //    }
 
-        
+
     //    if (LevelNum >= 3)
     //    {
     //        MessageBox.Show("Окончательный диагноз");

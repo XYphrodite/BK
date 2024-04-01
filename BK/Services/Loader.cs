@@ -65,33 +65,33 @@ public class Loader
             case 3:
                 return new List<SymptomModel>
 {
-    new SymptomModel { Name = "Боли в области сердца" },
-    new SymptomModel { Name = "Сильные боли в суставах" },
-    new SymptomModel { Name = "Учащенное сердцебиение" },
-    new SymptomModel { Name = "Чувство давления и неловкости в облеста шеи" },
-    new SymptomModel { Name = "Шейные лимфатические узлы увеличены" },
-    new SymptomModel { Name = "Похудание" },
-    new SymptomModel { Name = "Утомляемость" }
+    new SymptomModel("Боли в области сердца","Мышечная слабость","Учащенное сердцебиение"),//
+    new SymptomModel ("Чувство давления и неловкости в облеста шеи", "Боль в области передней поверхности шеи","Шейные лимфатические узлы увеличены" ),//
+    new SymptomModel ("Утомляемость","Апатия", "Учащенное сердцебиение"),//
+    new SymptomModel ("Нарушение салоотделения","Поредение волос по всей части головы","Апатия"),
+    new SymptomModel ("Нарушение функции желудочно-кишечного тракта", "Запоры","Снижение массы тела"),//
+    new SymptomModel ("Боли в суставах и мышцах", "Сильные боли в суставах","Мышечная слабость"), //
 };
             case 2:
                 return new List<SymptomModel>
 {
-    new SymptomModel ("Ухудшение памяти"),
-    new SymptomModel("Боль в области передней поверхности шеи"),
-    new SymptomModel("Боли в суставах и мышцах"),
-    new SymptomModel ("Нарушение функции желудочно-кишечного тракта"),
-    new SymptomModel("Повышенная сальность волос"),
-    new SymptomModel ("Сильные боли в суставах"),
-    new SymptomModel ("Раздражительность"),
-    new SymptomModel ("Снижение массы тела"),
-    new SymptomModel ("Отсутствие аппетита"),
-    new SymptomModel ("Озноб"),
-    new SymptomModel ("Нарушение салоотделения"),
-    new SymptomModel ("Апатия"),
+    new SymptomModel ("Боль в области передней поверхности шеи", "Избыточное отложение жира в области лица, шеи, туловища","Гиперпигментация кожных покровов лица, шеи, ладонных складок"),//
+    new SymptomModel ("Раздражительность","Ухудшение памяти", "Кожный зуд"),//
+    new SymptomModel ("Снижение массы тела", "Понижение аппетита","Похудание"),//
+    new SymptomModel ("Озноб", "Потливость","Температура"), //
+    new SymptomModel ("Мышечная слабость","Слабость","Вялость" ), //
+    new SymptomModel ("Апатия","Вялость","Ухудшение памяти"),//
+    new SymptomModel ("Снижение потоотделения", "Сухость кожи","Зябкость" ),//
 };
             case 1:
                 return new List<SymptomModel>
 {
+                        new SymptomModel ("Учащенное сердцебиение"),
+    new SymptomModel ("Сильные боли в суставах"),
+    new SymptomModel ("Шейные лимфатические узлы увеличены"),
+    new SymptomModel ("Повышенная сальность волос"),
+    new SymptomModel ("Отсутствие аппетита"),
+    new SymptomModel ("Ухудшение памяти"),
     new SymptomModel ("Вялость"),
     new SymptomModel ("Гиперпигментация кожных покровов лица, шеи, ладонных складок")   ,
     new SymptomModel ("Дрожание рук"),
@@ -100,19 +100,18 @@ public class Loader
     new SymptomModel ("Избыточное отложение жира в области лица, шеи, туловища"),
     new SymptomModel ("Кожа сухая, истонченная"),
     new SymptomModel ("Кожный зуд"),
-    new SymptomModel ("Мышечная слабость"),
     new SymptomModel ("Повышение аппетита"),
     new SymptomModel ("Понижение аппетита"),
     new SymptomModel ("Поредение волос по всей части головы"),
     new SymptomModel ("Потливость"),
     new SymptomModel ("Слабость")   ,
-    new SymptomModel ("Снижение потоотделения"),
     new SymptomModel ("Сонливость"),
     new SymptomModel ("Сухость во рту"),
     new SymptomModel ("Сухость кожи"),
     new SymptomModel ("Температура"),
     new SymptomModel ("Бессонница"),
-    new SymptomModel ("Шелушение кожи")
+    new SymptomModel ("Шелушение кожи"),
+    new SymptomModel ("Похудание"),
 };
             default:
                 throw new Exception("!!!!");
