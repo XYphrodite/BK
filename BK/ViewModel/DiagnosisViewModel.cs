@@ -68,16 +68,24 @@ public class DiagnosisVM : ViewModelBase
             //1
             .. CurrentSymtoms.Where(s => s.IsChecked),
         ];
+        foreach (var s in mySymptoms)
+        {
+            Output += "Вы выбрали " + s.Name + Environment.NewLine;
+        }
         //2
         foreach (var item in Loader.LoadSymptoms(2))
         {
             bool h = true;
             foreach (var s in item.Symptoms)
             {
-                if (!mySymptoms.Contains(s))
+                if (!mySymptoms.Any(o => o.Name == s.Name))
                     h = false;
             }
-            if (h) { mySymptoms.Add(item); }
+            if (h)
+            {
+                Output += "Обнаружение " + item.Name + " как вторичного симптома" + Environment.NewLine;
+                mySymptoms.Add(item);
+            }
         }
         //3
         foreach (var item in Loader.LoadSymptoms(3))
@@ -85,17 +93,21 @@ public class DiagnosisVM : ViewModelBase
             bool h = true;
             foreach (var s in item.Symptoms)
             {
-                if (!mySymptoms.Contains(s))
+                if (!mySymptoms.Any(o => o.Name == s.Name))
                     h = false;
             }
-            if (h) { mySymptoms.Add(item); }
+            if (h)
+            {
+                Output += "Обнаружение " + item.Name + " как третичного симптома" + Environment.NewLine;
+                mySymptoms.Add(item);
+            }
         }
-
+        Output += Environment.NewLine;
 
         foreach (var rule in Rules)
         {
             int a = 0;
-            foreach(var symptom in rule.Symptoms)
+            foreach (var symptom in rule.Symptoms)
             {
                 if (mySymptoms.Any(s => s.Name == symptom))
                     a++;
@@ -103,7 +115,7 @@ public class DiagnosisVM : ViewModelBase
 
             double percent = a / (double)rule.Symptoms.Count;
             if (percent != 0)
-                Output += $"Вероятность = {Math.Round(percent, 2) * 100}%" + Environment.NewLine + $"{rule.Diagnisis} = " + Environment.NewLine + Environment.NewLine;
+                Output += $"{rule.Diagnisis}" + Environment.NewLine + $"Вероятность = {Math.Round(percent, 2) * 100}%" + Environment.NewLine;
         }
     }
 
