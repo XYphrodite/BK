@@ -51,7 +51,7 @@ public class DiagnosisVM : ViewModelBase
     public DiagnosisVM()
     {
         Rules = Loader.LoadRules();
-        CurrentSymtoms = Loader.LoadSymptoms();
+        CurrentSymtoms = Loader.LoadSymptoms(3);
         Next = new RelayCommand(execute => next());
 
         LevelLabel = $"Симптомы";
@@ -59,55 +59,61 @@ public class DiagnosisVM : ViewModelBase
 
 
     public ICommand Next { get; }
-    private void next()
+
+    public void next()
     {
-        Output = string.Empty;
-        switch (LevelNum)
-        {
-            case 1:
-                Symptoms1 = CurrentSymtoms;
-                break;
-            case 2:
-                Symptoms2 = CurrentSymtoms;
-                break;
-            case 3:
-                Symptoms3 = CurrentSymtoms;
-                break;
-            default:break;
-        }
+
+    }
+
+    //private void next()
+    //{
+    //    Output = string.Empty;
+    //    switch (LevelNum)
+    //    {
+    //        case 1:
+    //            Symptoms1 = CurrentSymtoms;
+    //            break;
+    //        case 2:
+    //            Symptoms2 = CurrentSymtoms;
+    //            break;
+    //        case 3:
+    //            Symptoms3 = CurrentSymtoms;
+    //            break;
+    //        default:break;
+    //    }
 
 
 
-        //set diagnisis
-        List<string> mySymptoms = new List<string>();
-        foreach (var item in Symptoms1.Where(s => s.IsChecked))
-            mySymptoms.Add(item.Name);
-        foreach (var item in Symptoms2.Where(s => s.IsChecked))
-            mySymptoms.Add(item.Name);
-        foreach (var item in Symptoms3.Where(s => s.IsChecked))
-            mySymptoms.Add(item.Name);
+    //    //set diagnisis
+    //    List<string> mySymptoms = new List<string>();
+    //    foreach (var item in Symptoms1.Where(s => s.IsChecked))
+    //        mySymptoms.Add(item.Name);
+    //    foreach (var item in Symptoms2.Where(s => s.IsChecked))
+    //        mySymptoms.Add(item.Name);
+    //    foreach (var item in Symptoms3.Where(s => s.IsChecked))
+    //        mySymptoms.Add(item.Name);
 
 
-        foreach(var rule in Rules)
-        {
-            var symptoms = rule.Symptoms.Where(mySymptoms.Contains).ToList();
-            double percent = (double)symptoms.Count / (double)rule.Symptoms.Count;
-            if (percent != 0)
-                Output += $"Вероятность = {Math.Round(percent, 2) * 100}%" + Environment.NewLine + $"{rule.Diagnisis} = " + Environment.NewLine+ Environment.NewLine;
-        }
+    //    foreach(var rule in Rules)
+    //    {
+    //        var symptoms = rule.Symptoms.Where(mySymptoms.Contains).ToList();
+    //        double percent = (double)symptoms.Count / (double)rule.Symptoms.Count;
+    //        if (percent != 0)
+    //            Output += $"Вероятность = {Math.Round(percent, 2) * 100}%" + Environment.NewLine + $"{rule.Diagnisis} = " + Environment.NewLine+ Environment.NewLine;
+    //    }
 
         
-        if (LevelNum >= 3)
-        {
-            MessageBox.Show("Окончательный диагноз");
-            return;
-        }
-        else
-        {
-            LevelNum++;
-            LevelLabel = levelLabels[LevelNum];
-            CurrentSymtoms = Loader.LoadSymptoms(LevelNum);
-        }
-    }
+    //    if (LevelNum >= 3)
+    //    {
+    //        MessageBox.Show("Окончательный диагноз");
+    //        return;
+    //    }
+    //    else
+    //    {
+    //        LevelNum++;
+    //        LevelLabel = levelLabels[LevelNum];
+    //        CurrentSymtoms = Loader.LoadSymptoms(LevelNum);
+    //    }
+    //}
 }
 

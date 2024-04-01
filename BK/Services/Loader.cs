@@ -1,6 +1,4 @@
 ﻿using BK.Model;
-using BK.ViewModel;
-using System.IO;
 
 namespace BK.Services;
 
@@ -60,11 +58,11 @@ public class Loader
     }
 };
 
-    internal static ICollection<SymptomModel> LoadSymptoms(int n)
+    public static ICollection<SymptomModel> LoadSymptoms(int n)
     {
         switch (n)
         {
-            case 1:
+            case 3:
                 return new List<SymptomModel>
 {
     new SymptomModel { Name = "Боли в области сердца" },
@@ -78,43 +76,43 @@ public class Loader
             case 2:
                 return new List<SymptomModel>
 {
-    new SymptomModel { Name = "Бессонница" },
-    new SymptomModel { Name = "Боль в области передней поверхности шеи" },
-    new SymptomModel { Name = "Боли в суставах и мышцах" },
-    new SymptomModel { Name = "Нарушение функции желудочно-кишечного тракта" },
-    new SymptomModel { Name = "Повышенная сальность волос" },
-    new SymptomModel { Name = "Сильные боли в суставах" },
-    new SymptomModel { Name = "Раздражительность" }
+    new SymptomModel ("Ухудшение памяти"),
+    new SymptomModel("Боль в области передней поверхности шеи"),
+    new SymptomModel("Боли в суставах и мышцах"),
+    new SymptomModel ("Нарушение функции желудочно-кишечного тракта"),
+    new SymptomModel("Повышенная сальность волос"),
+    new SymptomModel ("Сильные боли в суставах"),
+    new SymptomModel ("Раздражительность"),
+    new SymptomModel ("Снижение массы тела"),
+    new SymptomModel ("Отсутствие аппетита"),
+    new SymptomModel ("Озноб"),
+    new SymptomModel ("Нарушение салоотделения"),
+    new SymptomModel ("Апатия"),
 };
-            case 3:
+            case 1:
                 return new List<SymptomModel>
 {
-    new SymptomModel { Name = "Апатия" },
-    new SymptomModel { Name = "Вялость" },
-    new SymptomModel { Name = "Гиперпигментация кожных покровов лица, шеи, ладонных складок" },
-    new SymptomModel { Name = "Дрожание рук" },
-    new SymptomModel { Name = "Запоры" },
-    new SymptomModel { Name = "Зябкость" },
-    new SymptomModel { Name = "Избыточное отложение жира в области лица, шеи, туловища" },
-    new SymptomModel { Name = "Кожа сухая, истонченная" },
-    new SymptomModel { Name = "Кожный зуд" },
-    new SymptomModel { Name = "Мышечная слабость" },
-    new SymptomModel { Name = "Нарушение салоотделения" },
-    new SymptomModel { Name = "Озноб" },
-    new SymptomModel { Name = "Отсутствие аппетита" },
-    new SymptomModel { Name = "Повышение аппетита" },
-    new SymptomModel { Name = "Понижение аппетита" },
-    new SymptomModel { Name = "Поредение волос по всей части головы" },
-    new SymptomModel { Name = "Потливость" },
-    new SymptomModel { Name = "Слабость" },
-    new SymptomModel { Name = "Снижение массы тела" },
-    new SymptomModel { Name = "Снижение потоотделения" },
-    new SymptomModel { Name = "Сонливость" },
-    new SymptomModel { Name = "Сухость во рту" },
-    new SymptomModel { Name = "Сухость кожи" },
-    new SymptomModel { Name = "Температура" },
-    new SymptomModel { Name = "Ухудшение памяти" },
-    new SymptomModel { Name = "Шелушение кожи" }
+    new SymptomModel ("Вялость"),
+    new SymptomModel ("Гиперпигментация кожных покровов лица, шеи, ладонных складок")   ,
+    new SymptomModel ("Дрожание рук"),
+    new SymptomModel ("Запоры"),
+    new SymptomModel ("Зябкость"),
+    new SymptomModel ("Избыточное отложение жира в области лица, шеи, туловища"),
+    new SymptomModel ("Кожа сухая, истонченная"),
+    new SymptomModel ("Кожный зуд"),
+    new SymptomModel ("Мышечная слабость"),
+    new SymptomModel ("Повышение аппетита"),
+    new SymptomModel ("Понижение аппетита"),
+    new SymptomModel ("Поредение волос по всей части головы"),
+    new SymptomModel ("Потливость"),
+    new SymptomModel ("Слабость")   ,
+    new SymptomModel ("Снижение потоотделения"),
+    new SymptomModel ("Сонливость"),
+    new SymptomModel ("Сухость во рту"),
+    new SymptomModel ("Сухость кожи"),
+    new SymptomModel ("Температура"),
+    new SymptomModel ("Бессонница"),
+    new SymptomModel ("Шелушение кожи")
 };
             default:
                 throw new Exception("!!!!");
