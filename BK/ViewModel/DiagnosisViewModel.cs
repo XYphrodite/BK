@@ -2,8 +2,6 @@
 using BK.Model;
 using BK.Services;
 using BK.ViewModels;
-using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 namespace BK.ViewModel;
