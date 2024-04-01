@@ -1,6 +1,7 @@
 ﻿using BK.Commands;
 using BK.Model;
 using BK.Services;
+using BK.View;
 using BK.ViewModels;
 using System.Windows.Input;
 
@@ -30,6 +31,17 @@ public class DiagnosisVM : ViewModelBase
         }
     }
 
+    private ICollection<RuleModel> _diagnisis = new List<RuleModel>();
+    public ICollection<RuleModel> Diagnisis
+    {
+        get => _diagnisis;
+        set
+        {
+            _diagnisis = value;
+            OnPropertyChanged(nameof(Diagnisis));
+        }
+    }
+
     private string _output;
 
     public string Output
@@ -49,13 +61,15 @@ public class DiagnosisVM : ViewModelBase
     {
         Rules = Loader.LoadRules();
         CurrentSymtoms = Loader.LoadSymptoms(1);
+        Diagnisis = Rules;
         Next = new RelayCommand(execute => next());
-
+        D = new RelayCommand(execute => d());
         LevelLabel = $"Симптомы";
     }
 
 
     public ICommand Next { get; }
+    public ICommand D { get; }
 
     public void next()
     {
@@ -117,55 +131,46 @@ public class DiagnosisVM : ViewModelBase
         }
     }
 
-    //private void next()
-    //{
-    //    Output = string.Empty;
-    //    switch (LevelNum)
-    //    {
-    //        case 1:
-    //            Symptoms1 = CurrentSymtoms;
-    //            break;
-    //        case 2:
-    //            Symptoms2 = CurrentSymtoms;
-    //            break;
-    //        case 3:
-    //            Symptoms3 = CurrentSymtoms;
-    //            break;
-    //        default:break;
-    //    }
+    public void d()
+    {
+        Output = string.Empty;
+        var symptioms = new List<SymptomModel>();
+        //find illness
+        foreach (var item in Diagnisis)
+        {
+            if (item.IsChecked)
+            {
+                // 3
+                var s3 = Loader.LoadSymptoms(3);
+                foreach (var symptom in s3)
+                {
 
-
-
-    //    //set diagnisis
-    //    List<string> mySymptoms = new List<string>();
-    //    foreach (var item in Symptoms1.Where(s => s.IsChecked))
-    //        mySymptoms.Add(item.Name);
-    //    foreach (var item in Symptoms2.Where(s => s.IsChecked))
-    //        mySymptoms.Add(item.Name);
-    //    foreach (var item in Symptoms3.Where(s => s.IsChecked))
-    //        mySymptoms.Add(item.Name);
-
-
-    //    foreach(var rule in Rules)
-    //    {
-    //        var symptoms = rule.Symptoms.Where(mySymptoms.Contains).ToList();
-    //        double percent = (double)symptoms.Count / (double)rule.Symptoms.Count;
-    //        if (percent != 0)
-    //            Output += $"Вероятность = {Math.Round(percent, 2) * 100}%" + Environment.NewLine + $"{rule.Diagnisis} = " + Environment.NewLine+ Environment.NewLine;
-    //    }
-
-
-    //    if (LevelNum >= 3)
-    //    {
-    //        MessageBox.Show("Окончательный диагноз");
-    //        return;
-    //    }
-    //    else
-    //    {
-    //        LevelNum++;
-    //        LevelLabel = levelLabels[LevelNum];
-    //        CurrentSymtoms = Loader.LoadSymptoms(LevelNum);
-    //    }
-    //}
+                }
+                // 2 
+                var s2 = Loader.LoadSymptoms(2);
+                item.Symptoms.ForEach(_s =>
+                {
+                    var s_2 = s2.FirstOrDefault(s => s.Name == _s);
+                    if (s_2 != null)
+                    {
+                        symptioms.Add(s_2);
+                        symptioms.AddRange(s_2.Symptoms);
+                    }
+                });
+                // 1
+                var s1 = Loader.LoadSymptoms(1);
+                item.Symptoms.ForEach(_s =>
+                {
+                    var s_1 = s1.FirstOrDefault(s => s.Name == _s);
+                    if (s_1 != null)
+                    {
+                        symptioms.Add(s_1);
+                    }
+                });
+                break;
+            }
+        }
+        CurrentSymtoms = symptioms;
+    }
 }
 

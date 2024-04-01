@@ -4,4 +4,5 @@ public class RuleModel
 {
     public List<string> Symptoms { get; set; } = new List<string>();
     public string Diagnisis { get; set; }
+    public bool IsChecked { get; set; }
 }
