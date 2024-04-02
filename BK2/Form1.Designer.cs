@@ -33,14 +33,17 @@
             textBoxG = new TextBox();
             textBoxP = new TextBox();
             groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
-            groupBox3 = new GroupBox();
-            groupBox4 = new GroupBox();
             out1 = new Label();
+            groupBox2 = new GroupBox();
             out2 = new Label();
+            groupBox3 = new GroupBox();
             out3 = new Label();
+            groupBox4 = new GroupBox();
             out4 = new Label();
             button1 = new Button();
+            out5 = new Label();
+            label3 = new Label();
+            label4 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -89,6 +92,15 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Конструкция 1";
             // 
+            // out1
+            // 
+            out1.AutoSize = true;
+            out1.Location = new Point(6, 19);
+            out1.Name = "out1";
+            out1.Size = new Size(19, 15);
+            out1.TabIndex = 0;
+            out1.Text = "11";
+            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(out2);
@@ -98,6 +110,15 @@
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Конструкция 2";
+            // 
+            // out2
+            // 
+            out2.AutoSize = true;
+            out2.Location = new Point(6, 19);
+            out2.Name = "out2";
+            out2.Size = new Size(19, 15);
+            out2.TabIndex = 1;
+            out2.Text = "11";
             // 
             // groupBox3
             // 
@@ -110,6 +131,15 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Конструкция 3";
             // 
+            // out3
+            // 
+            out3.AutoSize = true;
+            out3.Location = new Point(6, 19);
+            out3.Name = "out3";
+            out3.Size = new Size(19, 15);
+            out3.TabIndex = 2;
+            out3.Text = "11";
+            // 
             // groupBox4
             // 
             groupBox4.Controls.Add(out4);
@@ -119,33 +149,6 @@
             groupBox4.TabIndex = 7;
             groupBox4.TabStop = false;
             groupBox4.Text = "Конструкция 4";
-            // 
-            // out1
-            // 
-            out1.AutoSize = true;
-            out1.Location = new Point(6, 19);
-            out1.Name = "out1";
-            out1.Size = new Size(19, 15);
-            out1.TabIndex = 0;
-            out1.Text = "11";
-            // 
-            // out2
-            // 
-            out2.AutoSize = true;
-            out2.Location = new Point(6, 19);
-            out2.Name = "out2";
-            out2.Size = new Size(19, 15);
-            out2.TabIndex = 1;
-            out2.Text = "11";
-            // 
-            // out3
-            // 
-            out3.AutoSize = true;
-            out3.Location = new Point(6, 19);
-            out3.Name = "out3";
-            out3.Size = new Size(19, 15);
-            out3.TabIndex = 2;
-            out3.Text = "11";
             // 
             // out4
             // 
@@ -164,12 +167,43 @@
             button1.TabIndex = 8;
             button1.Text = "Рассчёт";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // out5
+            // 
+            out5.AutoSize = true;
+            out5.Location = new Point(12, 547);
+            out5.Name = "out5";
+            out5.Size = new Size(19, 15);
+            out5.TabIndex = 9;
+            out5.Text = "11";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(206, 9);
+            label3.Name = "label3";
+            label3.Size = new Size(55, 15);
+            label3.TabIndex = 10;
+            label3.Text = "70 — 110";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(206, 35);
+            label4.Name = "label4";
+            label4.Size = new Size(43, 15);
+            label4.TabIndex = 11;
+            label4.Text = "0 — 50";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(577, 579);
+            ClientSize = new Size(577, 571);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(out5);
             Controls.Add(button1);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
@@ -208,5 +242,8 @@
         private Label out3;
         private Label out4;
         private Button button1;
+        private Label out5;
+        private Label label3;
+        private Label label4;
     }
 }
