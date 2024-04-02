@@ -25,8 +25,8 @@ def main():
     plt.plot(cx_chart, cy_avg_chart, label='Average')
     plt.plot(cx_chart, cy_big_chart, label='Big')
     plt.xlabel('Consumption')
-    plt.ylabel('Pressure')
-    plt.title('Consumption vs Pressure')
+    #plt.ylabel('Pressure')
+    plt.title('Consumption')
     plt.legend()
 
     plt.subplot(2, 1, 2)
@@ -34,8 +34,8 @@ def main():
     plt.plot(px_chart, py_avg_chart, label='Average')
     plt.plot(px_chart, py_big_chart, label='Big')
     plt.xlabel('Pressure')
-    plt.ylabel('Consumption')
-    plt.title('Pressure vs Consumption')
+    #plt.ylabel('Consumption')
+    plt.title('Pressure')
     plt.legend()
 
     plt.tight_layout()
