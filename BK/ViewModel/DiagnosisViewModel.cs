@@ -137,40 +137,47 @@ public class DiagnosisVM : ViewModelBase
         var symptioms = new List<SymptomModel>();
         //find illness
         foreach (var item in Diagnisis)
-        {
             if (item.IsChecked)
             {
                 // 3
                 var s3 = Loader.LoadSymptoms(3);
                 foreach (var symptom in s3)
                 {
-
+                    var curS = item.Symptoms.FirstOrDefault(c => c == symptom.Name);
+                    if (curS != null)
+                    {
+                        symptioms.Add(symptom);
+                        foreach(var ss in symptom.Symptoms)
+                            symptioms.Add(ss);
+                    }
                 }
                 // 2 
                 var s2 = Loader.LoadSymptoms(2);
-                item.Symptoms.ForEach(_s =>
+                foreach (var symptom in s2)
                 {
-                    var s_2 = s2.FirstOrDefault(s => s.Name == _s);
-                    if (s_2 != null)
+                    var curS = item.Symptoms.FirstOrDefault(c => c == symptom.Name);
+                    if (curS != null)
                     {
-                        symptioms.Add(s_2);
-                        symptioms.AddRange(s_2.Symptoms);
+                        symptioms.Add(symptom);
+                        foreach (var ss in symptom.Symptoms)
+                            symptioms.Add(ss);
                     }
-                });
+                }
                 // 1
                 var s1 = Loader.LoadSymptoms(1);
-                item.Symptoms.ForEach(_s =>
+                foreach (var symptom in s1)
                 {
-                    var s_1 = s1.FirstOrDefault(s => s.Name == _s);
-                    if (s_1 != null)
+                    var curS = item.Symptoms.FirstOrDefault(c => c == symptom.Name);
+                    if (curS != null)
                     {
-                        symptioms.Add(s_1);
+                        symptioms.Add(symptom);
                     }
-                });
+                }
                 break;
             }
-        }
+        symptioms.ForEach(symptom => { symptom.IsChecked = true; });
         CurrentSymtoms = symptioms;
+        next();
     }
 }
 

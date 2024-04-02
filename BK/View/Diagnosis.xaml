@@ -55,7 +55,7 @@
         <Button Content="Поставить диагноз" Grid.Column="1" Grid.Row="2" Margin="10" Command="{Binding Next}"/>
         <!--COLUMN 2-->
         <Label Content="Вывод" FontSize="20" Grid.Column="2" Margin="20 0" Grid.Row="0"/>
-        <ScrollViewer Grid.Column="1" Margin="10" Grid.Row="1" Grid.RowSpan="3">
+        <ScrollViewer Grid.Column="2" Margin="10" Grid.Row="1" Grid.RowSpan="3">
             <TextBlock
                      Text="{Binding Output}"/>
         </ScrollViewer>
